@@ -203,7 +203,7 @@ def search():
 
 def reload_bd():
     parse.get_laptops()
-    parse.get.phones()
+    parse.get_phones()
     pass
 
 def main():

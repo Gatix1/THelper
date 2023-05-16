@@ -12,7 +12,7 @@ def get_darwin_laptops(db, cursor, url, page_num_class):
     try:
         pages_num = int(soup.select(f'.{page_num_class}')[-1].text)//7
     except:
-        pages_num = int(soup.select(f'.{page_num_class}')[-2].text)//7
+        pages_num = int(soup.select(f'.{page_num_class}')[0].text)//7
     print(pages_num)
     for page in range(1, pages_num+1):
         new_url = f'{url}{page}'
@@ -93,7 +93,7 @@ def get_bomba_laptops(db, cursor, url, page_num_class):
     try:
         pages_num = int(soup.select(f'.{page_num_class}')[-1].text)
     except:
-        pages_num = int(soup.select(f'.{page_num_class}')[-2].text)
+        pages_num = int(soup.select(f'.{page_num_class}')[0].text)
     print(pages_num)
     for page in range(1, pages_num+1):
         new_url = f'{url}{page}'
@@ -613,6 +613,3 @@ def get_laptops():
     get_enter_laptops(db, cursor, URLs['Enter'], 'page-link')
     get_bomba_laptops(db, cursor, URLs['Bomba'], 'p-numbers')
     get_darwin_laptops(db, cursor, URLs['Darwin'], 'page-link')
-
-get_laptops()
-get_phones()
