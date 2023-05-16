@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="display-4 text-light">Cautare</h2>
+    <hr width="90%">
+    <div>
+        <span class="display-6 ms-5 text-light">Sortare:</span><br><br>
+        <form method="post get">
+            <input class="form-control me-2 px-2" name="search_input" value="{{search_input}}" type="search" style="display: none" placeholder="Cauta Produs" aria-label="Search"></input>
+            <input type="submit" id="title_sort" name="title_sort" class="btn ms-5 mb-3 {{ state['title'] }}" onclick="buttonClicked(this)">După Denumire</input>
+            <input type="submit" id="price_sort" name="price_sort" class="btn ms-5 mb-3 {{ state['price'] }}" onclick="buttonClicked(this)">După Preț</input>
+            <input type="submit" id="ram_sort" name="ram_sort" class="btn ms-5 mb-3 {{ state['ram'] }}" onclick="buttonClicked(this)">După RAM</input>
+            <input type="submit" id="memory_sort" name="memory_sort" class="btn ms-5 mb-3 {{ state['memory'] }}" onclick="buttonClicked(this)">După Memorie</input>
+            <br>
+            <input type="submit" id="telefoane_select" name="telefoane_select" class="btn ms-5 mb-3 {{ selected[0] }}">Telefoane</input>
+            <input type="submit" id="laptopuri_select" name="laptopuri_select" class="btn ms-5 mb-3 {{ selected[1] }}">Laptopuri</input>
+            <input type="submit" name="laptopuri_select" class="btn ms-5 mb-3 {{ selected[1] }}">Reload</input>
+        </form>
+    </div> <br>
+    <div class="bg-dark-2">
+    {% for phone in phones %}
+        <div class="p-4 m-4" style="width: 12rem; display: inline-block; margin: auto; width: 20%;">
+          <a class="h4 text-light" style="text-decoration:none" href="{{phone[4]}}">
+          <div style="align-items: center; text-align: center;">
+            <img src="/static/imgs/{{phone[0]}}.jpg" height="200em" class="mb-3" alt="{{phone[0]}}"> <br>
+            <a class="h4 text-light" style="text-decoration:none" href="{{phone[4]}}">{{ phone[0] }}</a><br>
+            {% if phone[2] == 404 %}
+
+            {% else %}
+                <span class="text-light">{{ phone[2] }} RAM |</span>
+            {% endif %}
+            {% if phone[3] == 404 %}
+
+            {% else %}
+                <span class="text-light">{{ phone[3] }} GB</span>
+            {% endif %} <br>
+              <span class="text-light h5 py-5">{{ phone[1] }} MDL</span><br>
+              <a class="text-light h6" style="text-decoration:none" href="{{phone[4]}}">[{{ phone[5] }}]</a><br>
+          </div>
+          </a>
+        </div>
+    {% endfor %}
+        {% for laptop in laptops %}
+        <div class="p-4 m-4" style="width: 12rem; display: inline-block; margin: auto; width: 20%;">
+          <a class="h4 text-light" style="text-decoration:none" href="{{laptop[6]}}">
+          <div style="align-items: center; text-align: center;">
+            {% if laptop[7] == 'BOMBA.MD' %}
+              <img src="/static/imgs/{{laptop[0]}}.jpg" height="120px" class="mb-5" alt="{{laptop[0]}}"> <br>
+            {% else %}
+              <img src="/static/imgs/{{laptop[0]}}.jpg" height="200px" class="mb-3" alt="{{laptop[0]}}"> <br>
+            {% endif %}
+            <a class="h4 text-light" style="text-decoration:none" href="{{laptop[6]}}">{{ laptop[0] }}</a><br>
+              {% if laptop[2] == '' %}
+
+              {% else %}
+                <span class="text-light">{{ laptop[2] }} |</span>
+              {% endif %}
+              {% if laptop[3] == '' %}
+
+              {% else %}
+                <span class="text-light">{{ laptop[3] }} |</span>
+              {% endif %}
+              {% if laptop[4] == 404 %}
+
+            {% else %}
+                <span class="text-light"> {{ laptop[4] }} RAM | </span>
+            {% endif %}
+            {% if laptop[5] == 404 %}
+
+            {% else %}
+                <span class="text-light">{{ laptop[5] }} GB</span>
+            {% endif %} <br>
+              <span class="h5 text-light py-5">{{ laptop[1] }} MDL</span><br>
+              <a class="h6 text-light" style="text-decoration:none" href="{{laptop[6]}}">[{{ laptop[7] }}]</a><br>
+          </div>
+          </a>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock content %}

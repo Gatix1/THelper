@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+<head>
+    <script src="{{ url_for('static', filename='scripts/main.js') }}" type="text/javascript"></script>
+</head>
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="display-4 text-light">Laptopuri</h2>
+    <hr width="90%">
+    <div>
+        <span class="display-6 text-light ms-5">Sortare:</span>
+        <form method="post" style="display: inline-block">
+            <button type="submit" id="title_sort" name="title_sort" class="btn ms-5 mb-3 {{ state['title'] }}" onclick="buttonClicked(this)">După Denumire</button>
+            <button type="submit" id="price_sort" name="price_sort" class="btn ms-5 mb-3 {{ state['price'] }}" onclick="buttonClicked(this)">După Preț</button>
+            <button type="submit" id="ram_sort" name="ram_sort" class="btn ms-5 mb-3 {{ state['ram'] }}" onclick="buttonClicked(this)">După RAM</button>
+            <button type="submit" id="memory_sort" name="memory_sort" class="btn ms-5 mb-3 {{ state['memory'] }}" onclick="buttonClicked(this)">După Memorie</button>
+        </form>
+    </div> <br>
+    <div class="bg-dark-2">
+    {% for laptop in laptops %}
+        <div class="p-4 m-4" style="width: 12rem; display: inline-block; margin: auto; width: 20%;">
+          <a class="h4 text-light" style="text-decoration:none" href="{{laptop[6]}}">
+          <div style="align-items: center; text-align: center;">
+            {% if laptop[7] == 'BOMBA.MD' %}
+              <img src="/static/imgs/{{laptop[0]}}.jpg" height="120px" class="mb-5" alt="{{laptop[0]}}"> <br>
+            {% else %}
+              <img src="/static/imgs/{{laptop[0]}}.jpg" height="200px" class="mb-3" alt="{{laptop[0]}}"> <br>
+            {% endif %}
+            <a class="h4 text-light" style="text-decoration:none" href="{{laptop[6]}}">{{ laptop[0] }}</a><br>
+              {% if laptop[2] == '' %}
+
+              {% else %}
+                <span class="text-light">{{ laptop[2] }} |</span>
+              {% endif %}
+              {% if laptop[3] == '' %}
+
+              {% else %}
+                <span class="text-light">{{ laptop[3] }} |</span>
+              {% endif %}
+              {% if laptop[4] == 404 %}
+
+            {% else %}
+                <span class="text-light"> {{ laptop[4] }} RAM | </span>
+            {% endif %}
+            {% if laptop[5] == 404 %}
+
+            {% else %}
+                <span class="text-light">{{ laptop[5] }} GB</span>
+            {% endif %} <br>
+              <span class="h5 text-light py-5">{{ laptop[1] }} MDL</span><br>
+              <a class="h6 text-light" style="text-decoration:none" href="{{laptop[6]}}">[{{ laptop[7] }}]</a><br>
+          </div>
+          </a>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock content %}
