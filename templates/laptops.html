@@ -17,9 +17,9 @@
             <button type="submit" id="memory_sort" name="memory_sort" class="btn ms-5 mb-3 {{ state['memory'] }}" onclick="buttonClicked(this)">După Memorie</button>
         </form>
     </div> <br>
-    <div class="bg-dark-2">
+    <div>
     {% for laptop in laptops %}
-        <div class="p-4 m-4" style="width: 12rem; display: inline-block; margin: auto; width: 20%;">
+        <div class="p-4 m-4 menu-card bg-dark-2" style="width: 12rem; display: inline-block; margin: auto; width: 20%;">
           <a class="h4 text-light" style="text-decoration:none" href="{{laptop[6]}}">
           <div style="align-items: center; text-align: center;">
             {% if laptop[7] == 'BOMBA.MD' %}

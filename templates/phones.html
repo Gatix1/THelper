@@ -13,9 +13,9 @@
             <button type="submit" id="memory_sort" name="memory_sort" class="btn ms-5 mb-3 {{ state['memory'] }}" onclick="buttonClicked(this)">După Memorie</button>
         </form>
     </div> <br>
-    <div class="bg-dark-2">
+    <div>
     {% for phone in phones %}
-        <div class="p-4 m-4" style="width: 12rem; display: inline-block; margin: auto; width: 20%;">
+        <div class="p-4 m-4 bg-dark-2 menu-card" style="width: 12rem; display: inline-block; margin: auto; width: 20%;">
           <a class="h4 text-light" style="text-decoration:none" href="{{phone[4]}}">
           <div style="align-items: center; text-align: center;">
             <img src="/static/imgs/{{phone[0]}}.jpg" height="200em" class="mb-3" alt="{{phone[0]}}"> <br>

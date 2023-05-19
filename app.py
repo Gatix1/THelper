@@ -54,7 +54,7 @@ def init_app():
 
 @app.route("/home")
 def home_page():
-    return render_template('home.html')
+    return render_template('home.html', title="THelper")
 
 @app.route("/about")
 def about_page():
@@ -149,56 +149,11 @@ def search():
 
     # query = request.args['search']
     search_input = request.args['search_input']  # try this instead
-
-    states = {}
-    states['title'] = 'btn-secondary'
-    states['price'] = 'btn-dark'
-    states['ram'] = 'btn-dark'
-    states['memory'] = 'btn-dark'
-
-    if 'title_sort' in request.args:
-        laptops = loadLaptops("title")
-        states['title'] = 'btn-secondary'
-        states['price'] = 'btn-dark'
-        states['ram'] = 'btn-dark'
-        states['memory'] = 'btn-dark'
-    elif 'price_sort' in request.args:
-        laptops = loadLaptops("price")
-        states['title'] = 'btn-dark'
-        states['price'] = 'btn-secondary'
-        states['ram'] = 'btn-dark'
-        states['memory'] = 'btn-dark'
-    elif 'ram_sort' in request.args:
-        laptops = loadLaptops("ram")
-        states['title'] = 'btn-dark'
-        states['price'] = 'btn-dark'
-        states['ram'] = 'btn-secondary'
-        states['memory'] = 'btn-dark'
-    elif 'memory_sort' in request.args:
-        laptops = loadLaptops("memory")
-        states['title'] = 'btn-dark'
-        states['price'] = 'btn-dark'
-        states['ram'] = 'btn-dark'
-        states['memory'] = 'btn-secondary'
-    else:
-        states = {}
-        states['title'] = 'btn-secondary'
-        states['price'] = 'btn-dark'
-        states['ram'] = 'btn-dark'
-        states['memory'] = 'btn-dark'
-
-    if 'laptopuri_select' in request.args:
-        selected = ["btn-dark", "btn-secondary"]
-    elif 'telefonuri_select' in request.args:
-        selected = ["btn-secondary", "btn-dark"]
-    else:
-        selected = ["btn-secondary", "btn-dark"]
-
-    phones = loadPhones(search_text=search_input)
-    laptops = loadLaptops(search_text=search_input)
+    phones = loadPhones(search_text=search_input, sort_col='price')
+    laptops = loadLaptops(search_text=search_input, sort_col='price')
     print(phones)
     print(laptops)
-    return render_template('search.html', search_input=search_input, selected=selected, sort_product_type="Telefoane", phones=phones, laptops=laptops, state=states)
+    return render_template('search.html', sort_product_type="Telefoane", phones=phones, laptops=laptops)
 
 
 def reload_bd():
